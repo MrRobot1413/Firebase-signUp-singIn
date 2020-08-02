@@ -45,30 +45,7 @@ public class RegistrationActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
-    public void createNewUser(String email, String password){
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("TAG", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(RegistrationActivity.this, "Authentication success.",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("TAG", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegistrationActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                        // ...
-                    }
-                });
-    }
-
-    public void signup(String email, String password){
+    public void signup(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -88,18 +65,18 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void addUser(View view) {
-        if(nameText.getText().toString().trim() != ""){
+        if (nameText.getText().toString().trim() != "") {
             emailErrorField.setErrorEnabled(false);
         }
-        if(passwordText.getText().toString().trim() != ""){
+        if (passwordText.getText().toString().trim() != "") {
             errorField.setErrorEnabled(false);
         }
-        if(nameText.getText().toString().trim().equals("") || passwordText.getText().toString().trim().equals("")){
+        if (nameText.getText().toString().trim().equals("") || passwordText.getText().toString().trim().equals("")) {
             emailErrorField.setError("This field can't be empty");
             errorField.setError("This field can't be empty");
-        } else if(passwordText.getText().toString().length() < 6){
+        } else if (passwordText.getText().toString().length() < 6) {
             errorField.setError("Password must has at least 6 symbols.");
-        } else{
+        } else {
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(RegistrationActivity.this);
             builder.setTitle("Succsessful registration");
             builder.setMessage("You has been registered succsessful!");
